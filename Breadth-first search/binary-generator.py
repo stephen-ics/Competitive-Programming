@@ -1,3 +1,5 @@
+import queue
+
 q = queue.Queue()
 q.put("")
 
