@@ -2,12 +2,10 @@ import queue
 
 n = int(input())
 
-def valid(maze, moves, visited):
+def valid(maze, moves):
+  visited = {}
   x = 0
   y = 0
-
-  if moves in visited:
-    return False
 
   for move in moves:
     if move == 'L':
@@ -31,12 +29,21 @@ def valid(maze, moves, visited):
       return False
     elif (maze[y][x] == '*'):
       return False
+    elif [y, x] in visited:
+      return False
+
+    visited.append([y, x])
   
   return True
       
-def findEnd(maze, moves):
+def findEnd(maze, moves, output):
   x = 0
   y = 0
+
+  if len(maze) == 1 and len(maze[0]) == 1:
+    if not maze[0][0] == "*":
+      output.append(len(moves) + 1)
+      return True
 
   for move in moves:
     if move == 'L':
@@ -48,9 +55,11 @@ def findEnd(maze, moves):
     elif move == 'D':
       y += 1
     if (x == len(maze[0])-1 and y == len(maze)-1):
-      print(len(moves) + 1)
+      output.append(len(moves) + 1)
       return True
   return False
+
+output = []
 
 for i in range(n):
   height = int(input())
@@ -64,17 +73,17 @@ for i in range(n):
   nums = queue.Queue()
   nums.put('')
   add = ''
-  count = 0
-  visited = []
 
-  while not findEnd(maze, add):
+  while not findEnd(maze, add, output):
+    if nums.empty():
+      output.append(-1)
+      break
+
     add = nums.get()
-    count += 1
     for j in ['L', 'R', 'U', 'D']:
       put = add + j
-      if valid(maze, put, visited):
-        visited.append(put)
+      if valid(maze, put):
         nums.put(put)
-    if nums.empty():
-      print('-1')
-      break
+
+for i in output:
+  print(i)
