@@ -2,9 +2,12 @@ import queue
 
 n = int(input())
 
-def valid(maze, moves):
+def valid(maze, moves, visited):
   x = 0
   y = 0
+
+  if moves in visited:
+    return False
 
   for move in moves:
     if move == 'L':
@@ -28,7 +31,7 @@ def valid(maze, moves):
       return False
     elif (maze[y][x] == '*'):
       return False
-      
+  
   return True
       
 def findEnd(maze, moves):
@@ -62,15 +65,16 @@ for i in range(n):
   nums.put('')
   add = ''
   count = 0
+  visited = []
 
   while not findEnd(maze, add):
     add = nums.get()
     count += 1
     for j in ['L', 'R', 'U', 'D']:
       put = add + j
-      if valid(maze, put):
+      if valid(maze, put, visited):
+        visited.append(put)
         nums.put(put)
-    
-    if count > 100:
+    if nums.empty():
       print('-1')
       break
