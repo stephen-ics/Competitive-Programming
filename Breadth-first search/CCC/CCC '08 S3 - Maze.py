@@ -29,10 +29,10 @@ def valid(maze, moves):
       return False
     elif (maze[y][x] == '*'):
       return False
-    elif [y, x] in visited:
+    elif (y, x) in visited:
       return False
 
-    visited.append([y, x])
+    visited[(y, x)] = True
   
   return True
       
