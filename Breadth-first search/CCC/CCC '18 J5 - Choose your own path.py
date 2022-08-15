@@ -10,24 +10,25 @@ visited[1] = 0
 queue = [1]
 
 run = True
-possible = True
+possible = False
 
 while queue and run:
     x = queue.pop(0)
-    for i in paths[x]:
+    for i in paths[x-1]:
         if i == 0:
             run = False
-            possible = False
-            print('Y')
-            print(visited[x] + 2)
+            possible = True
             break
 
         if visited[i] == -1:
-            visited[i] += visited[x] + 1
+            visited[i] = visited[x] + 1
             queue.append(i)
             
 
-if possible:
+if possible and -1 not in visited.values():
+    print('Y')
+    print(visited[x] + 1)
+else:
     print('N')
 
         
