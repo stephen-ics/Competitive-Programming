@@ -1,89 +1,89 @@
-import queue
-
 n = int(input())
-
-def valid(maze, moves):
-  visited = {}
-  x = 0
-  y = 0
-
-  for move in moves:
-    if move == 'L':
-      if not (maze[y][x] == '+' or maze[y][x] == '-'):
-        return False
-      x -= 1
-    elif move == 'R':
-      if not (maze[y][x] == '+' or maze[y][x] == '-'):
-        return False
-      x += 1
-    elif move == 'U':
-      if not (maze[y][x] == '+' or maze[y][x] == '|'):
-        return False
-      y -= 1
-    elif move == 'D':
-      if not (maze[y][x] == '+' or maze[y][x] == '|'):
-        return False
-      y += 1
-
-    if not (0 <= x < len(maze[0]) and 0 <= y < len(maze)):
-      return False
-    elif (maze[y][x] == '*'):
-      return False
-    elif (y, x) in visited:
-      return False
-
-    visited[(y, x)] = True
-  
-  return True
-      
-def findEnd(maze, moves, output):
-  x = 0
-  y = 0
-
-  if len(maze) == 1 and len(maze[0]) == 1:
-    if not maze[0][0] == "*":
-      output.append(len(moves) + 1)
-      return True
-
-  for move in moves:
-    if move == 'L':
-      x -= 1
-    elif move == 'R':
-      x += 1
-    elif move == 'U':
-      y -= 1
-    elif move == 'D':
-      y += 1
-    if (x == len(maze[0])-1 and y == len(maze)-1):
-      output.append(len(moves) + 1)
-      return True
-  return False
-
 output = []
 
 for i in range(n):
-  height = int(input())
-  width = int(input())
+    n = int(input())
+    m = int(input())
+    
+    paths = []
+    queue = []
+    visited = {}
 
-  maze = []
-  for i in range(height):
-    mazeLine = input()
-    maze.append(list(mazeLine))
+    for i in range(n):
+        visited[i] = [-1]*m
 
-  nums = queue.Queue()
-  nums.put('')
-  add = ''
+    for i in range(n):
+        path = list(input())
+        paths.append(path)
+    
+    start = [0, 0]
+    end = [n-1, m-1]
 
-  while not findEnd(maze, add, output):
-    if nums.empty():
-      output.append(-1)
-      break
+    queue.append(start)
+    visited[start[0]][start[1]] = 0
+    
+    run = True
+    notPossible = True
 
-    add = nums.get()
-    for j in ['L', 'R', 'U', 'D']:
-      put = add + j
-      if valid(maze, put):
-        nums.put(put)
+    if len(paths) == 1 and len(paths[0]) == 1:
+        if not paths[0][0] == "*":
+            output.append(1)
+            run = False
+            notPossible = False
 
+    while queue and run:
+        x = queue.pop(0)
+
+        for i in ['L', 'R', 'U', 'D']:     
+            if i == 'L' and 0 < x[1]:
+                if visited[x[0]][x[1]-1] == -1:
+                    if paths[x[0]][x[1]] == '+' or paths[x[0]][x[1]] == '-':
+                        if paths[x[0]][x[1]-1] != '*':
+                            visited[x[0]][x[1]-1] = visited[x[0]][x[1]] + 1
+                            queue.append([x[0],x[1]-1])
+                if [x[0],x[1]] == end:
+                    run = False
+                    notPossible = False
+                    output.append(visited[x[0]][x[1]]+1)
+                    break
+
+            if i == 'R' and x[1] < m-1:
+                if visited[x[0]][x[1]+1] == -1:
+                    if paths[x[0]][x[1]] == '+' or paths[x[0]][x[1]] == '-':
+                        if paths[x[0]][x[1]+1] != '*':
+                            visited[x[0]][x[1]+1] = visited[x[0]][x[1]] + 1
+                            queue.append([x[0],x[1]+1])
+                if [x[0],x[1]] == end:
+                    run = False
+                    notPossible = False
+                    output.append(visited[x[0]][x[1]]+1)
+                    break
+                
+            if i == 'U' and 0 < x[0]:
+                if visited[x[0]-1][x[1]] == -1:
+                    if paths[x[0]][x[1]] == '+' or paths[x[0]][x[1]] == '|':
+                        if paths[x[0]-1][x[1]] != '*':
+                            visited[x[0]-1][x[1]] = visited[x[0]][x[1]] + 1
+                            queue.append([x[0]-1,x[1]])
+                if [x[0],x[1]] == end:
+                    run = False
+                    notPossible = False
+                    output.append(visited[x[0]][x[1]]+1)
+                    break
+
+            if i == 'D' and x[0] < n-1:
+                if visited[x[0]+1][x[1]] == -1:
+                    if paths[x[0]][x[1]] == '+' or paths[x[0]][x[1]] == '|':
+                        if paths[x[0]+1][x[1]] != '*':
+                            visited[x[0]+1][x[1]] = visited[x[0]][x[1]] + 1
+                            queue.append([x[0]+1,x[1]])
+                if [x[0],x[1]] == end:
+                    run = False
+                    notPossible = False
+                    output.append(visited[x[0]][x[1]]+1)
+                    break
+    if notPossible:
+        output.append(-1)
 for i in output:
-  print(i)
+    print(i)
+    
