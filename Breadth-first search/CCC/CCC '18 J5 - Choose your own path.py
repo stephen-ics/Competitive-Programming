@@ -3,12 +3,12 @@ paths = []
 visited = {}
 for i in range(n):
     path = [int(i) for i in input().split(" ")]
-    popPaths = path.pop(0)
+    
+    if path[0] != 0:
+        popPaths = path.pop(0)
+
     paths.append(path)
     visited[int(i+1)] = -1
-
-for path in paths:
-    print(path)
 
 visited[1] = 0
 queue = [1]
