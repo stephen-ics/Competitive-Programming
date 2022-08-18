@@ -17,8 +17,6 @@
 # Initialization
     # Lists: 
         # myList = []
-    # Multi-Dimensional Lists: 
-        # myList = [][]
     # Arrays: 
         # import array as arr
         # myArr = arr.array('i', [1, 2 , 3])
