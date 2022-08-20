@@ -6,15 +6,15 @@
 
 ### Overview
 ### Here is a list of Data Structures that will be covered
-Lists
-Multi-Dimensional Lists
-Arrays
-Dictionaries
-Sets
-Tuples
-Linked-Lists
-Queues
-Stacks
+    Lists
+    Multi-Dimensional Lists
+    Arrays
+    Dictionaries
+    Sets
+    Tuples
+    Linked-Lists
+    Queues
+    Stacks
 ### Priority Queues --> Heaps (optimal priority queues)
 Used in Djikstra's Shortest Path and Prim's Minimum Spanning Tree
 
