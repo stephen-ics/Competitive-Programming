@@ -44,11 +44,11 @@ Used in Djikstra's Shortest Path and Prim's Minimum Spanning Tree
     myList = [1, 2, 3]
     heapq.heapify(myList) 
  
-### Copying
+#### Copying
     .copy(x) --> returns a shallow copy of x
     .deepcopy(x) --> returns a deep copy of x
 
-### Mutable
+#### Mutable
     Lists: Yes
     Dictionaries: Yes
     Tuples: No
@@ -56,24 +56,24 @@ Used in Djikstra's Shortest Path and Prim's Minimum Spanning Tree
     Frozen Set: No --> frozen() to change to change set to frozen set
     Byte Array: Yes
 
-### Ordered:
+#### Ordered:
     Lists: Yes
     Tuples: Yes
     Sets: No
 
-### Indexing/Slicing:
+#### Indexing/Slicing:
     Lists: Yes
     Tuples: Yes
     Sets: No
 
-# Duplicate Elements:
+#### Duplicate Elements:
     Lists: Yes
     Tuples: Yes
     Sets: No
 
-## Python Time Complexity (Big O Notation)
+### Python Time Complexity (Big O Notation)
 
-### Order
+#### Order
     O(1) --> Amazing
     O(logN) --> Great
     O(N) --> Good
@@ -83,27 +83,27 @@ Used in Djikstra's Shortest Path and Prim's Minimum Spanning Tree
     O(2^n) --> Horrible
     O(n!) --> Atrocious
 
-### Appending
+#### Appending
     Lists: O(1)
     Dicts: O(1)
     Sets: O(1)
 
-### Indexing
+#### Indexing
     Lists: O(1)
     Dictionaries: O(1)
     Sets: O(1)
 
-### If Val in Data Structure
+#### If Val in Data Structure
     Lists: O(N)
     Dictionaries: O(1)
     Sets: O(1)
 
-### For val in Data Structure
+#### For val in Data Structure
     Lists: O(N)
     Dictionaries: O(N)
     Sets: O(N)
 
-### Sorting (.sort()):
+#### Sorting (.sort()):
     Lists: O(N logN)
 
 
