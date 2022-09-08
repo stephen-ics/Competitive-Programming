@@ -39,8 +39,6 @@
         # import heapq
         # myList = [1, 2, 3]
         # heapq.heapify(myList) 
-        
-
  
 # Copying
     # .copy(x) --> returns a shallow copy of x
@@ -81,10 +79,14 @@
     # O(2^n) --> Horrible
     # O(n!) --> Atrocious
 
+# Construction
+    # Heaps: O(n)
+
 # Appending
     # Lists: O(1)
     # Dicts: O(1)
     # Sets: O(1)
+    # Heaps: O(log(n))
 
 # Indexing
     # Lists: O(1)
@@ -103,3 +105,9 @@
 
 # Sorting (.sort()):
     # Lists: O(N logN)
+
+# Popping/Polling (dequeuing)
+    # Heaps: O(log(n))
+
+# Peeking
+    # Heaps: O(1)
